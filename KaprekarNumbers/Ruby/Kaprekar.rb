@@ -12,8 +12,26 @@ for i in startRange..endRange
 	squareIndex = String(i**2)
 
 	begin
-		prefixNum = Integer(squareIndex[0 .. (squareIndex.length/2 - 1)])
-		sufixNum = Integer(squareIndex[(squareIndex.length/2) .. (squareIndex.length)])
+		
+		prefixNum = squareIndex[0 .. (squareIndex.length/2 - 1)]
+		sufixNum = squareIndex[(squareIndex.length/2) .. (squareIndex.length)]
+
+		# Remove octal representation in String, i.e "008" -> "8"
+		index = 0
+		while prefixNum[index] == '0'
+			prefixNum[index] = ''
+			index += 1
+		end
+		
+		# Remove octal representation in String, i.e "008" -> "8"
+		index = 0
+		while sufixNum[index] == '0'
+			sufixNum[index] = ''
+			index += 1
+		end
+
+		prefixNum = Integer(prefixNum)
+		sufixNum = Integer(sufixNum)
 
 		if (prefixNum + sufixNum)  == i
 			puts i
